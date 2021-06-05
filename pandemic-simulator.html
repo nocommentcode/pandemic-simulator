@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
+        integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.0.0/chartjs-plugin-annotation.min.js"
+        integrity="sha512-JP7f/zE4RT2Y3SG5zOmxsrPIy1MJst7hB6HoZtqDFia+oI4v3goB/Zt+A5jMR+DxdRFF075Y5Hc5z6wCGDW3uw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="simulation.js"></script>
+
+</head>
+
+<body>
+
+    
+    <div id="home-screen">
+
+    <div class="row">
+        <div class="main-title">
+            Pandemic Simulator 1000	&reg;
+        </div>
+    </div>
+    <div class="row home-page-box">
+
+        <div class="col-lg-6 col-12 instructions-col">
+            <div class="instructions">
+                <div class="title">
+                    Select from a preset scenario...
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="preset preset-1" type="button">
+                            <div  class="label button-label" id="preset-1-label">
+                                Terrible
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="preset preset-2" type="button">
+                            <div class="label button-label" id="preset-2-label" >
+                                Average
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="preset  preset-3" type="button">
+                            <div class="label button-label" id="preset-3-label"   >
+                                Great
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="desc preset-1-bg" id="preset-1-desc">
+                            <p>No restrictions applied</p>
+                            <p>Quarentine not in place</p>
+                            <p>Night clubs open</p>
+                            <p>No one weares masks</p>
+                            <button class="btn btn-primary preset-btn preset-btn-1" type="button" id="preset-1-btn"
+                            href="#">Start</button>
+                        </div>
+                        <div class="desc preset-2-bg" id="preset-2-desc" style="display: none;">
+                            <p>Inter city travel banned</p>
+                            <p>Quarentine enabled</p>
+                            <p>Quarentine slow</p>
+                            <p>Poor mask wearing</p>
+                            <button class="btn btn-primary preset-btn preset-btn-2" type="button" id="preset-2-btn" href="#"
+                            style="display: none;">Start</button>
+                        </div>
+                        <div class="desc preset-3-bg" id="preset-3-desc" style="display: none;">
+                            <p>Strick 5km rule restrictions</p>
+                            <p>Quarentine mandatory, very people get tested quickly </p>
+                            <p>Excellent hygene</p>
+                            <p>Mask mandates</p>
+                            <button class="btn btn-primary preset-btn preset-btn-3" type="button" id="preset-3-btn" href="#"
+                            style="display: none;">Start</button>
+                        </div>
+                    </div>
+                </div>
+                
+
+  
+                <div class="alternative">
+                    Or customise the simulation settings on the right...
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 instructions-col">
+            <div class="wrapper">
+                <div class="tabs">
+                    <div class="tab">
+                        <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+                        <label for="tab-1" class="tab-label">General</label>
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Population:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:100; --max:700; --step:100; --value:300; --text-value:"300";'>
+                                                    <input id="setting-population" type="range" min="100" max="700"
+                                                        step="100" value="300"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc">
+                                            The amount of people included in the simulation
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Infections:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:1; --max:5; --step:1; --value:1; --text-value:"1";'>
+                                                    <input id="setting-infections" type="range" min="1" max="5" step="1"
+                                                        value="1"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc">
+                                            The number of people already infected at the start
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Store enabled:
+                                            </div>
+                                            <div class="switch-box">
+                                                <label class="switch">
+                                                    <input type="checkbox" checked id=setting-store-enabled>
+                                                    <div>
+                                                        <span></span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc">
+                                            Simulates people trafveling to a central location
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab">
+                        <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
+                        <label for="tab-2" class="tab-label">Prevention</label>
+                        <div class="tab-content">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Social Distancing:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:0; --max:5; --step:1; --value:2; --text-value:"2";'>
+                                                    <input id="setting-social-dist" type="range" min="0" max="5"
+                                                        step="1" value="2"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc" id="desc-social-dist">
+                                            Some people stay 1.5 meters apart
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Hygene Level:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:0; --max:5; --step:1; --value:2; --text-value:"2";'>
+                                                    <input id="setting-hygene" type="range" min="0" max="5" step="1"
+                                                        value="2"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc" id="desc-hygene">
+                                            Some people sanitise when entering shops
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Mask Wearing:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:0; --max:5; --step:1; --value:2; --text-value:"2";'>
+                                                    <input id="setting-masks" type="range" min="0" max="5" step="1"
+                                                        value="2"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc" id="desc-masks">
+                                            Some people wear masks
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Travel Restrictions:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:0; --max:5; --step:1; --value:3; --text-value:"3";'>
+                                                    <input id="setting-travel-radius" type="range" min="0" max="5"
+                                                        step="1" value="3"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc" id="desc-travel-radius">
+                                            Inter city travel is completely banned
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab">
+                        <input type="radio" name="css-tabs" id="tab-3" class="tab-switch">
+                        <label for="tab-3" class="tab-label">Quarentine</label>
+                        <div class="tab-content">
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Quarentine enabled:
+                                            </div>
+                                            <div class="switch-box">
+                                                <label class="switch">
+                                                    <input type="checkbox" checked id=setting-quarentine-enabled>
+                                                    <div>
+                                                        <span></span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc">
+                                            Does the government implement Quarentine?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="q-threshold-row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Delay:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:0; --max:5; --step:1; --value:2; --text-value:"2";'>
+                                                    <input id="setting-quaretine-threshold" type="range" min="0" max="5"
+                                                        step="1" value="2"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc" id="desc-quaretine-threshold">
+                                            Quarentine implemented after case numbers rise
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="q-responsiveness-row">
+                                <div class="col-lg-12">
+                                    <div class="setting">
+                                        <div class="setting-select">
+                                            <div class="setting-name">
+                                                Speed:
+                                            </div>
+                                            <div class="range-slider-box">
+                                                <div class="range-slider"
+                                                    style='--min:0; --max:5; --step:1; --value:2; --text-value:"2";'>
+                                                    <input id="setting-quaretine-response" type="range" min="0" max="5"
+                                                        step="1" value="2"
+                                                        oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                                                    <output></output>
+                                                    <div class='range-slider__progress'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-desc" id="desc-quaretine-response">
+                                            People are quarentined within days of getting symptoms
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="start-sym-btn" class="btn btn-primary run-btn">run</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="main-credits">
+            Created by Malo Hamon
+        </div>
+    </div>
+</div>
+    <div class="simulation" id="simulation" style="display: none; ">
+        <div class="top-bar">
+            <div class="btn btn-primary exit" id="exit-btn" type="button">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="btn btn-primary replay" id="replay-btn" type="button">
+                <i class="fas fa-redo"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"> 
+                <div class="stats-rectangle">
+                    <div class="stat infectious">
+                        <div class="label">
+                            Infections:
+                            <div id="infectious-count-field" class="stat-field"></div>
+                        </div>
+                    </div>
+                    <div class="stat non-infectious">
+                        <div class="label">
+                            Unexposed:
+                            <div id="non-infectious-count-field" class="stat-field"></div>
+                        </div>
+                    </div>
+                    <div class="stat recovered">
+                        <div class="label">
+                            Recovered:
+                            <div id="recovered-count-field" class="stat-field"></div>
+                        </div>
+                    </div>
+                    <div class="stat dead">
+                        <div class="label">
+                            Dead:
+                            <div id="dead-count-field" class="stat-field"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin: 0;"> 
+            <div class="col-xl-6 col-lg-6 col-md-12 charts">
+                <div class="chart-square">
+                    <canvas id="scatter" width="600" height="600"></canvas>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-12 charts">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="chart-rectangle">
+                            <canvas id="curve" height="176"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="row chart-row">
+                    <div class="col-lg-12">
+                        <div class="chart-rectangle">
+                            <canvas id="daily" height="176"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bot-bar"></div>
+        </div>
+    </div>
+</body>
+
+</html>
